@@ -41,7 +41,7 @@ public class Obstacle_Spawner : MonoBehaviour {
         speed = Rocket.GetComponent<Rigidbody2D>().velocity.y;
 
         height = this.transform.position.y;
-        Debug.Log(height);
+
 
         if (speed != 0)
         {
