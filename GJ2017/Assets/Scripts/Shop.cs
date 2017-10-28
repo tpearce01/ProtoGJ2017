@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shop : MonoBehaviour {
 
@@ -12,6 +13,13 @@ public class Shop : MonoBehaviour {
 	int frameLevel;
 	int weaponLevel;
 	int ammoLevel;
+
+	Text fuelText;
+	Text engineText;
+	Text shieldText;
+	Text frameText;
+	Text weaponText;
+	Text ammoText;
 
 	void Start(){
 		playerMoney = 1;
@@ -69,5 +77,9 @@ public class Shop : MonoBehaviour {
 		if (playerMoney > GetCost ()) {
 			return 100 * level * level;
 		}
+	}
+
+	public void SetText(){
+
 	}
 }
