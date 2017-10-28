@@ -27,6 +27,7 @@ public class Rocket : MonoBehaviour {
 	public int currentAmmo;
 	[SerializeField]Weapon weapon;
 	public float turnSpeed;
+	Quaternion baseRotation;
 
 	//Environmental Variables
 	[SerializeField]int orbitHeight;
@@ -34,6 +35,9 @@ public class Rocket : MonoBehaviour {
 	//Game Variables
 	bool roundEnd = false;
 	public float maxHeight = 0;
+
+	float timeToRoundEndMaster;
+	float timeToRoundEnd;
 
 	void Awake(){
 		r = this;
@@ -56,13 +60,16 @@ public class Rocket : MonoBehaviour {
 			}
 			//If not in space, check for entry into space and adjust gravity accordingly
 			if (!inSpace) {
-				SetGravity ();
+				SetInSpace ();
 			}
-			if(!roundEnd && rocket.velocity.y < -10){
-				EndRound();
-			}
-			if (rocket.velocity.y < 0.1) {
-				rocket.drag = 0;
+
+			//Check for end of round
+			if(!roundEnd && rocket.velocity.y < 0){
+				if (timeToRoundEnd <= 0) {
+					EndRound ();
+				} else {
+					timeToRoundEnd -= Time.deltaTime;
+				}
 			}
 		}
 
@@ -80,8 +87,10 @@ public class Rocket : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
-		if (hasLaunched && currentFuel > 0) {
+		if (hasLaunched && currentFuel > 0 && Input.GetKey (KeyCode.Space)) {
 			Propel ();
+		} else {
+			fuelEffect.Stop ();
 		}
 		Movement ();
 	}
@@ -98,6 +107,8 @@ public class Rocket : MonoBehaviour {
 		drag = 1;
 		weapon = Weapon.Basic;
 		turnSpeed = 1;
+		timeToRoundEnd = timeToRoundEndMaster = 1.5f;
+		baseRotation = gameObject.transform.rotation;
 	}
 
 	/// <summary>
@@ -112,9 +123,9 @@ public class Rocket : MonoBehaviour {
 	/// <summary>
 	/// Sets gravity to 0 if the rocket reaches orbit
 	/// </summary>
-	void SetGravity(){
+	void SetInSpace(){
 		if (gameObject.transform.position.y > orbitHeight) {
-			rocket.gravityScale = 0;
+			rocket.gravityScale = 0.1f;
 			inSpace = true;
 			starEffect.Play ();
 		}
@@ -137,9 +148,11 @@ public class Rocket : MonoBehaviour {
 	void Propel(){
 		Debug.Log ("Fueling");
 		currentFuel -= 0.1f;
-		rocket.AddForce (Vector2.up * enginePower);
+		rocket.AddForce (transform.up * enginePower);
 		if (currentFuel <= 0) {
-			fuelEffect.Stop();
+			fuelEffect.Stop ();
+		} else {
+			fuelEffect.Play ();
 		}
 	}
 
@@ -170,6 +183,8 @@ public class Rocket : MonoBehaviour {
 		roundEnd = false;
 		rocket.drag = drag;
 		maxHeight = 0;
+		timeToRoundEnd = timeToRoundEndMaster;
+		gameObject.transform.rotation = baseRotation;
 	}
 
 	void Movement(){
