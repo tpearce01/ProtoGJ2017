@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour {
 	public static Menu m;
 
+	int menuActive = -1;
 
-	string sceneName = "tylers_scene";
+	string thisScene = "tylers_scene";
 	string mainMenuScene = "main_menu";
 
 	[SerializeField] List<GameObject> menus = new List<GameObject>();
@@ -17,64 +18,112 @@ public class Menu : MonoBehaviour {
 	}
 
 	void Start(){
-		CloseAll ();
+		menus [(int)MenuPanel.Shop].SetActive (false);
 	}
 
 	void Update(){
+		//Allow Pause / Unpause using Escape or P
 		if (Input.GetKeyDown (KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) {
-			menus [(int)MenuPanel.PauseMenu].SetActive (!menus [(int)MenuPanel.PauseMenu].activeSelf);
-			if (menus [(int)MenuPanel.PauseMenu].activeSelf) {
-				Pause ();
-			} else {
+			if (!MenuActive ()) {	//If no active menu, open Pause menu
+				PauseMenu ();
+			} else if(menuActive == (int)MenuPanel.Pause) {	//If Pause menu active, close it
 				Resume ();
 			}
+
 		}
 	}
 
+	/// <summary>
+	/// Close active menu and resume game
+	/// </summary>
 	public void Resume(){
 		Time.timeScale = 1;
-		CloseAll ();
+		CloseActiveMenu ();
 	}
 
+	/// <summary>
+	/// Return to game and reset the game
+	/// </summary>
 	public void Restart(){
 		Rocket.r.Reset();
 		Resume ();
 	}
 
+	/// <summary>
+	/// Open the Shop menu
+	/// </summary>
 	public void Shop(){
-		CloseAll ();
-		Pause ();
-		menus [(int)MenuPanel.ShopMenu].SetActive (true);
+		CloseActiveMenu ();
+		OpenMenu (MenuPanel.Shop);
 	}
 
+	/// <summary>
+	/// Pause the game and open the pause menu
+	/// </summary>
 	public void PauseMenu(){
-		CloseAll ();
 		Pause ();
-		menus [(int)MenuPanel.PauseMenu].SetActive (true);
+		OpenMenu (MenuPanel.Pause);
 	}
 
+	/// <summary>
+	///  Pause the game and open the intermission menu
+	/// </summary>
 	public void IntermissionMenu(){
 		Pause ();
-		menus [(int)MenuPanel.IntermissionMenu].SetActive (true);
+		OpenMenu (MenuPanel.Intermission);
 	}
 
-	void CloseAll(){
-		foreach (GameObject go in menus) {
-			go.SetActive (false);
-		}
-	}
-
+	/// <summary>
+	/// Pause the game
+	/// </summary>
 	public void Pause(){
 		Time.timeScale = 0;
 	}
 
+	// !! NOT IMPLEMENTED !!
 	public void ExitToMainMenu(){
-		SceneManager.LoadScene (mainMenuScene);
+		//SceneManager.LoadScene (mainMenuScene);
 	}
+
+	/// <summary>
+	/// Returns true if a menu is currently active
+	/// </summary>
+	/// <returns><c>true</c>, if active was menued, <c>false</c> otherwise.</returns>
+	public bool MenuActive(){
+		return !(menuActive == -1);
+	}
+
+	/// <summary>
+	/// Closes the current menu
+	/// </summary>
+	void CloseActiveMenu(){
+		if(menuActive != -1){
+			menus [menuActive].SetActive (false);
+			menuActive = -1;
+		}
+	}
+
+	/// <summary>
+	/// Opens the specified menu.
+	/// </summary>
+	/// <param name="mp">Mp.</param>
+	void OpenMenu(MenuPanel mp){
+		OpenMenu ((int)mp);
+	}
+
+	/// <summary>
+	/// Opens the specified menu
+	/// </summary>
+	/// <param name="i">The index.</param>
+	void OpenMenu(int i){
+		menus [i].SetActive (true);
+		menuActive = i;
+	}
+		
 }
 
 public enum MenuPanel{
-	PauseMenu = 0,
-	ShopMenu = 1,
-	IntermissionMenu = 2
+	Pause = 0,
+	Shop = 1,
+	Intermission = 2
 }
