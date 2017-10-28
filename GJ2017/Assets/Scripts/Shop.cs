@@ -5,24 +5,31 @@ using UnityEngine.UI;
 
 public class Shop : MonoBehaviour {
 
-	public int playerMoney;
+	public static Shop s;
 
-	int fuelLevel;
-	int engineLevel;
-	int shieldLevel;
-	int frameLevel;
-	int weaponLevel;
-	int ammoLevel;
+	public int playerMoney = 0;
 
-	Text fuelText;
-	Text engineText;
-	Text shieldText;
-	Text frameText;
-	Text weaponText;
-	Text ammoText;
+	int fuelLevel = 1;
+	int engineLevel = 1;
+	int shieldLevel = 1;
+	int frameLevel = 1;
+	int weaponLevel = 1;
+	int ammoLevel = 1;
 
-	void Start(){
-		playerMoney = 1;
+	[SerializeField] Text fuelText;
+	[SerializeField] Text engineText;
+	[SerializeField] Text shieldText;
+	[SerializeField] Text frameText;
+	[SerializeField] Text weaponText;
+	[SerializeField] Text ammoText;
+	[SerializeField] Text playerMoneyText;
+
+	void Awake(){
+		s = this;
+	}
+
+	void OnEnable(){
+		SetText ();
 	}
 
 	public void UpgradeFuel(){
@@ -30,6 +37,7 @@ public class Shop : MonoBehaviour {
 			playerMoney -= GetCost (fuelLevel);
 			fuelLevel++;
 			Rocket.r.maxFuel += fuelLevel * fuelLevel;
+			SetText ();
 		}
 	}
 
@@ -38,6 +46,7 @@ public class Shop : MonoBehaviour {
 			playerMoney -= GetCost (engineLevel);
 			engineLevel++;
 			Rocket.r.enginePower += Rocket.r.enginePower / 2;
+			SetText ();
 		}
 	}
 
@@ -46,6 +55,7 @@ public class Shop : MonoBehaviour {
 			playerMoney -= GetCost (shieldLevel);
 			shieldLevel++;
 			Rocket.r.maxShield += shieldLevel * 5;
+			SetText ();
 		}
 	}
 
@@ -53,7 +63,9 @@ public class Shop : MonoBehaviour {
 		if (playerMoney > GetCost (frameLevel)) {
 			playerMoney -= GetCost (frameLevel);
 			frameLevel++;
-			Rocket.r.drag /= 2;
+			Rocket.r.drag /= 1.1f;
+			Rocket.r.turnSpeed *= 1.2f;
+			SetText ();
 		}
 	}
 
@@ -62,6 +74,7 @@ public class Shop : MonoBehaviour {
 		if (playerMoney > GetCost (weaponLevel)) {
 			playerMoney -= GetCost (weaponLevel);
 			weaponLevel++;
+			SetText ();
 		}
 	}
 
@@ -70,14 +83,21 @@ public class Shop : MonoBehaviour {
 			playerMoney -= GetCost (ammoLevel);
 			ammoLevel++;
 			Rocket.r.maxAmmo += 5;
+			SetText ();
 		}
 	}
 
 	public int GetCost(int level){
-			return 100 * level * level;
+		return 25 * Mathf.Max((level * level * level)/2, 1);
 	}
 
 	public void SetText(){
-
+		fuelText.text = "Cost: $" + GetCost (fuelLevel);
+		engineText.text = "Cost: $" + GetCost (engineLevel);
+		shieldText.text = "Cost: $" + GetCost (shieldLevel);
+		frameText.text = "Cost: $" + GetCost (frameLevel);
+		weaponText.text = "Cost: $" + GetCost (weaponLevel);
+		ammoText.text = "Cost: $" + GetCost (ammoLevel);
+		playerMoneyText.text = "Player Money: $" + playerMoney;
 	}
 }

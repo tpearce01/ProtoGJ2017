@@ -25,9 +25,14 @@ public class Rocket : MonoBehaviour {
 	public int maxAmmo;
 	[SerializeField]int currentAmmo;
 	[SerializeField]Weapon weapon;
+	public float turnSpeed;
 
 	//Environmental Variables
 	[SerializeField]int orbitHeight;
+
+	//Game Variables
+	bool roundEnd = false;
+	float maxHeight = 0;
 
 	void Awake(){
 		r = this;
@@ -45,17 +50,33 @@ public class Rocket : MonoBehaviour {
 				Launch ();
 			}
 		} else {
+			if (rocket.transform.position.y > maxHeight) {
+				maxHeight = rocket.transform.position.y;
+			}
 			//If not in space, check for entry into space and adjust gravity accordingly
 			if (!inSpace) {
 				SetGravity ();
 			}
+			if(!roundEnd && rocket.velocity.y < -10){
+				EndRound();
+			}
+			if (rocket.velocity.y < 0.1) {
+				rocket.drag = 0;
+			}
 		}
+	}
+
+	void EndRound(){
+		roundEnd = true;
+		Shop.s.playerMoney += (int)maxHeight * 2;
+		Menu.m.IntermissionMenu ();
 	}
 
 	void FixedUpdate(){
 		if (hasLaunched && currentFuel > 0) {
 			Propel ();
 		}
+		Movement ();
 	}
 
 	/// <summary>
@@ -67,8 +88,9 @@ public class Rocket : MonoBehaviour {
 		maxShield = currentShield = 10;
 		enginePower = 10;
 		launchPower = 1000;
-		drag = 10;
+		drag = 1;
 		weapon = Weapon.Basic;
+		turnSpeed = 1;
 	}
 
 	/// <summary>
@@ -107,7 +129,7 @@ public class Rocket : MonoBehaviour {
 	void Propel(){
 		Debug.Log ("Fueling");
 		currentFuel -= 0.1f;
-		rocket.AddForce (new Vector2(0, enginePower));
+		rocket.AddForce (Vector2.up * enginePower);
 		if (currentFuel <= 0) {
 			fuelEffect.Stop();
 		}
@@ -133,9 +155,20 @@ public class Rocket : MonoBehaviour {
 		gameObject.transform.position = startPos;
 		fuelEffect.Stop ();
 		fuelEffect.gameObject.SetActive (false);
+		roundEnd = false;
+		rocket.drag = drag;
 	}
 
+	void Movement(){
+		if (Input.GetKey (KeyCode.A)) {
+			gameObject.transform.Rotate (0, 0, turnSpeed);
+		}
+		if (Input.GetKey (KeyCode.D)) {
+			gameObject.transform.Rotate (0, 0, -turnSpeed);
+		}
+	}
 }
+	
 
 public enum Weapon{
 	Basic = 0
