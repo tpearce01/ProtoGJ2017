@@ -74,9 +74,7 @@ public class Shop : MonoBehaviour {
 	}
 
 	public int GetCost(int level){
-		if (playerMoney > GetCost ()) {
 			return 100 * level * level;
-		}
 	}
 
 	public void SetText(){
