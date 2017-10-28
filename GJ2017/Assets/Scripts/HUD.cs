@@ -14,6 +14,8 @@ public class HUD : MonoBehaviour {
 	//HUD Variables
 	[SerializeField]Slider fuelMeter;
 	[SerializeField]Image fuelMeterFill;
+	[SerializeField]Slider shieldMeter;
+	[SerializeField]Image shieldMeterFill;
 
 	public float heightOffset;
 
@@ -27,8 +29,10 @@ public class HUD : MonoBehaviour {
 
 	void Update(){
 		metrics.text = "Velocity: " + rb.velocity + "\n" +
-			"Height: " + (r.transform.position.y + heightOffset).ToString("0.00");
+			"Height: " + (r.transform.position.y + heightOffset).ToString("0.00") + "\n" + 
+			"Ammo: " + Rocket.r.currentAmmo;
 		SetFuelMeter ();
+		SetShieldMeter ();
 	}
 
 	/// <summary>
@@ -38,5 +42,11 @@ public class HUD : MonoBehaviour {
 		float fuel = r.GetFuelPercent ();
 		fuelMeter.value = fuel;
 		fuelMeterFill.color = (fuel>.5f?Color.Lerp (Color.yellow, Color.green, (fuel - .5f) * 2):Color.Lerp(Color.red, Color.yellow, fuel*2));
+	}
+
+	void SetShieldMeter(){
+		float shield = r.GetShieldPercent ();
+		shieldMeter.value = shield;
+		shieldMeterFill.color = (shield>.5f?Color.Lerp (Color.yellow, Color.blue, (shield - .5f) * 2):Color.Lerp(Color.white, Color.yellow, shield*2));
 	}
 }
