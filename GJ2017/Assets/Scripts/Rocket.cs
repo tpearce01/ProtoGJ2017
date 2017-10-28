@@ -5,11 +5,14 @@ using UnityEngine.UI;
 
 public class Rocket : MonoBehaviour {
 
+	public static Rocket r;
+
 	//Ship Variables
-	bool hasLaunched = false;
-	bool inSpace = false;
+	[SerializeField] bool hasLaunched = false;
+	[SerializeField] bool inSpace = false;
 	[SerializeField] Rigidbody2D rocket;
-	[SerializeField] GameObject fuelEffect;
+	[SerializeField] ParticleSystem fuelEffect;
+	Vector2 startPos;
 
 	//Stat Variables
 	[SerializeField]float maxFuel;
@@ -26,8 +29,13 @@ public class Rocket : MonoBehaviour {
 	//Environmental Variables
 	[SerializeField]int orbitHeight;
 
+	void Awake(){
+		r = this;
+	}
+
 	void Start(){
 		Initialize ();
+		startPos = gameObject.transform.position;
 	}
 
 	void Update(){
@@ -89,8 +97,8 @@ public class Rocket : MonoBehaviour {
 		Debug.Log ("Launched");
 		hasLaunched = true;
 		rocket.AddForce (new Vector2 (0, launchPower));
-		fuelEffect.SetActive (true);
-		fuelEffect.GetComponent<ParticleSystem> ().Play ();
+		fuelEffect.gameObject.SetActive (true);
+		fuelEffect.Play ();
 	}
 
 	/// <summary>
@@ -101,7 +109,7 @@ public class Rocket : MonoBehaviour {
 		currentFuel -= 0.1f;
 		rocket.AddForce (new Vector2(0, enginePower));
 		if (currentFuel <= 0) {
-			fuelEffect.GetComponent<ParticleSystem>().Stop();
+			fuelEffect.Stop();
 		}
 	}
 
@@ -111,6 +119,20 @@ public class Rocket : MonoBehaviour {
 	/// <returns>The fuel percent.</returns>
 	public float GetFuelPercent(){
 		return currentFuel / maxFuel;
+	}
+
+	/// <summary>
+	/// Reset rocket for new launch
+	/// </summary>
+	public void Reset(){
+		rocket.velocity = Vector2.zero;
+		hasLaunched = false;
+		inSpace = false;
+		rocket.gravityScale = 1;
+		ResetStats ();
+		gameObject.transform.position = startPos;
+		fuelEffect.Stop ();
+		fuelEffect.gameObject.SetActive (false);
 	}
 
 }
