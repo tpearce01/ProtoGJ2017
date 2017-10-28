@@ -63,7 +63,7 @@ public class Rocket : MonoBehaviour {
 			if (!inSpace) {
 				SetInSpace ();
 			} else if (inSpace) {
-				starEffect.main.gravityModifier = Mathf.Clamp ((rocket.velocity.y / 10), -10f, 10f);
+				//starEffect.main.gravityModifier = Mathf.Clamp ((rocket.velocity.y / 10), -10f, 10f);
 			}
 
 			//Check for end of round
