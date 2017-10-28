@@ -12,6 +12,7 @@ public class Rocket : MonoBehaviour {
 	[SerializeField] bool inSpace = false;
 	[SerializeField] Rigidbody2D rocket;
 	[SerializeField] ParticleSystem fuelEffect;
+	[SerializeField] ParticleSystem starEffect;
 	Vector2 startPos;
 
 	//Stat Variables
@@ -23,7 +24,7 @@ public class Rocket : MonoBehaviour {
 	[SerializeField]float currentShield;
 	public float drag;
 	public int maxAmmo;
-	[SerializeField]int currentAmmo;
+	public int currentAmmo;
 	[SerializeField]Weapon weapon;
 	public float turnSpeed;
 
@@ -64,6 +65,7 @@ public class Rocket : MonoBehaviour {
 				rocket.drag = 0;
 			}
 		}
+
 	}
 
 	/// <summary>
@@ -71,6 +73,7 @@ public class Rocket : MonoBehaviour {
 	/// </summary>
 	void EndRound(){
 		roundEnd = true;
+		starEffect.Stop ();
 		maxHeight += HUD.hud.heightOffset;
 		Shop.s.playerMoney += (int)maxHeight * 2;
 		Menu.m.IntermissionMenu ();
@@ -89,7 +92,7 @@ public class Rocket : MonoBehaviour {
 	public void Initialize(){
 		maxFuel = currentFuel = 10;
 		maxAmmo = currentAmmo = 10;
-		maxShield = currentShield = 10;
+		maxShield = currentShield = 0;
 		enginePower = 10;
 		launchPower = 1000;
 		drag = 1;
@@ -113,6 +116,7 @@ public class Rocket : MonoBehaviour {
 		if (gameObject.transform.position.y > orbitHeight) {
 			rocket.gravityScale = 0;
 			inSpace = true;
+			starEffect.Play ();
 		}
 	}
 
@@ -147,6 +151,10 @@ public class Rocket : MonoBehaviour {
 		return currentFuel / maxFuel;
 	}
 
+	public float GetShieldPercent(){
+		return currentShield>0?currentShield / maxShield:0;
+	}
+
 	/// <summary>
 	/// Reset rocket for new launch
 	/// </summary>
@@ -171,6 +179,30 @@ public class Rocket : MonoBehaviour {
 		if (Input.GetKey (KeyCode.D)) {
 			gameObject.transform.Rotate (0, 0, -turnSpeed);
 		}
+	}
+
+	/// <summary>
+	/// Modifies the shield value.
+	/// </summary>
+	/// <param name="value">Value.</param>
+	public void ModifyShield(int value){
+		currentShield = Mathf.Clamp (currentShield + value, -1, maxShield);
+	}
+
+	/// <summary>
+	/// Modifies the fuel value.
+	/// </summary>
+	/// <param name="value">Value.</param>
+	public void ModifyFuel(int value){
+		currentFuel = Mathf.Clamp (currentFuel + value, -1, maxFuel);
+	}
+
+	/// <summary>
+	/// Modifies the ammo value.
+	/// </summary>
+	/// <param name="value">Value.</param>
+	public void ModifyAmmo(int value){
+		currentAmmo = Mathf.Clamp (currentAmmo + value, -1, maxAmmo);
 	}
 }
 	
