@@ -30,7 +30,8 @@ public class Rocket : MonoBehaviour {
 	Quaternion baseRotation;
 
 	//Environmental Variables
-	[SerializeField]int orbitHeight;
+	public int orbitHeight;
+	public int marsHeight;
 
 	//Game Variables
 	bool roundEnd = false;
@@ -61,6 +62,8 @@ public class Rocket : MonoBehaviour {
 			//If not in space, check for entry into space and adjust gravity accordingly
 			if (!inSpace) {
 				SetInSpace ();
+			} else if (inSpace) {
+				starEffect.main.gravityModifier = Mathf.Clamp ((rocket.velocity.y / 10), -10f, 10f);
 			}
 
 			//Check for end of round
@@ -218,6 +221,13 @@ public class Rocket : MonoBehaviour {
 	/// <param name="value">Value.</param>
 	public void ModifyAmmo(int value){
 		currentAmmo = Mathf.Clamp (currentAmmo + value, -1, maxAmmo);
+	}
+
+	public void Win(){
+		Debug.Log ("You Win The Game!!");
+		gameObject.GetComponent<SpriteRenderer> ().enabled = false;
+		rocket.velocity = Vector2.zero;
+		//Exit to main menu
 	}
 }
 	
