@@ -32,7 +32,7 @@ public class Rocket : MonoBehaviour {
 
 	//Game Variables
 	bool roundEnd = false;
-	float maxHeight = 0;
+	public float maxHeight = 0;
 
 	void Awake(){
 		r = this;
@@ -44,7 +44,7 @@ public class Rocket : MonoBehaviour {
 	}
 
 	void Update(){
-		if (!hasLaunched) {
+		if (!hasLaunched && !Menu.m.MenuActive()) {
 			//Check for launch
 			if (Input.GetKeyDown (KeyCode.Space)) {
 				Launch ();
@@ -66,8 +66,12 @@ public class Rocket : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Called at the end of a round
+	/// </summary>
 	void EndRound(){
 		roundEnd = true;
+		maxHeight += HUD.hud.heightOffset;
 		Shop.s.playerMoney += (int)maxHeight * 2;
 		Menu.m.IntermissionMenu ();
 	}
@@ -157,6 +161,7 @@ public class Rocket : MonoBehaviour {
 		fuelEffect.gameObject.SetActive (false);
 		roundEnd = false;
 		rocket.drag = drag;
+		maxHeight = 0;
 	}
 
 	void Movement(){
