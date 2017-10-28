@@ -25,4 +25,11 @@ public class Follow : MonoBehaviour {
 			Mathf.Clamp(destination.y, target.transform.position.y - maxYDistanceUp, target.transform.position.y + maxYDistanceDown), 
 			zValue);
 	}
+
+	void Update(){
+		gameObject.transform.position = new Vector3(
+			Mathf.Clamp(gameObject.transform.position.x, target.transform.position.x - maxXDistance, target.transform.position.x + maxXDistance), 
+			Mathf.Clamp(gameObject.transform.position.y, target.transform.position.y - maxYDistanceUp, target.transform.position.y + maxYDistanceDown), 
+			zValue);
+	}
 }

@@ -15,10 +15,11 @@ public class Menu : MonoBehaviour {
 
 	void Awake(){
 		m = this;
+		OpenMenu (MenuPanel.Shop);
 	}
 
 	void Start(){
-		menus [(int)MenuPanel.Shop].SetActive (false);
+		CloseActiveMenu ();
 	}
 
 	void Update(){
