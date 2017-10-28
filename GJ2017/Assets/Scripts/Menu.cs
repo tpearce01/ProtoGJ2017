@@ -13,9 +13,9 @@ public class Menu : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) {
 			menus [(int)MenuPanel.PauseMenu].SetActive (!menus [(int)MenuPanel.PauseMenu].activeSelf);
 			if (menus [(int)MenuPanel.PauseMenu].activeSelf) {
-				Time.timeScale = 0;
+				Pause ();
 			} else {
-				Time.timeScale = 1;
+				Resume ();
 			}
 		}
 	}
@@ -26,9 +26,8 @@ public class Menu : MonoBehaviour {
 	}
 
 	public void Restart(){
-		//SceneManager.LoadScene (sceneName);
 		Rocket.r.Reset();
-		CloseAll ();
+		Resume ();
 	}
 
 	public void Shop(){

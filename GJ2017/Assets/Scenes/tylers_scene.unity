@@ -1750,6 +1750,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 578054268}
+--- !u!198 &606582426 stripped
+ParticleSystem:
+  m_PrefabParentObject: {fileID: 198842424684404830, guid: 4e9da35cfa93043cd80ecfb50428e0da,
+    type: 2}
+  m_PrefabInternal: {fileID: 773553288}
 --- !u!1 &642781589
 GameObject:
   m_ObjectHideFlags: 0
@@ -2011,6 +2016,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114395230560749970, guid: 4e9da35cfa93043cd80ecfb50428e0da,
+        type: 2}
+      propertyPath: fuelEffect
+      value: 
+      objectReference: {fileID: 606582426}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e9da35cfa93043cd80ecfb50428e0da, type: 2}
   m_IsPrefabParent: 0
