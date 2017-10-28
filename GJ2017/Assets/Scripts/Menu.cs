@@ -9,13 +9,26 @@ public class Menu : MonoBehaviour {
 
 	[SerializeField] List<GameObject> menus = new List<GameObject>();
 
+	void Update(){
+		if (Input.GetKeyDown (KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) {
+			menus [(int)MenuPanel.PauseMenu].SetActive (!menus [(int)MenuPanel.PauseMenu].activeSelf);
+			if (menus [(int)MenuPanel.PauseMenu].activeSelf) {
+				Time.timeScale = 0;
+			} else {
+				Time.timeScale = 1;
+			}
+		}
+	}
+
 	public void Resume(){
-		CloseAll ();
 		Time.timeScale = 1;
+		CloseAll ();
 	}
 
 	public void Restart(){
-		SceneManager.LoadScene (sceneName);
+		//SceneManager.LoadScene (sceneName);
+		Rocket.r.Reset();
+		CloseAll ();
 	}
 
 	public void Shop(){

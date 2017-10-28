@@ -5,11 +5,14 @@ using UnityEngine.UI;
 
 public class Rocket : MonoBehaviour {
 
+	public static Rocket r;
+
 	//Ship Variables
-	bool hasLaunched = false;
-	bool inSpace = false;
+	[SerializeField] bool hasLaunched = false;
+	[SerializeField] bool inSpace = false;
 	[SerializeField] Rigidbody2D rocket;
 	[SerializeField] GameObject fuelEffect;
+	Vector2 startPos;
 
 	//Stat Variables
 	[SerializeField]float maxFuel;
@@ -26,14 +29,19 @@ public class Rocket : MonoBehaviour {
 	//Environmental Variables
 	[SerializeField]int orbitHeight;
 
+	void Awake(){
+		r = this;
+	}
+
 	void Start(){
 		Initialize ();
+		startPos = gameObject.transform.position;
 	}
 
 	void Update(){
 		if (!hasLaunched) {
 			//Check for launch
-			if (Input.GetKeyDown (KeyCode.Space)) {
+			if (Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0)) {
 				Launch ();
 			}
 		} else {
@@ -111,6 +119,17 @@ public class Rocket : MonoBehaviour {
 	/// <returns>The fuel percent.</returns>
 	public float GetFuelPercent(){
 		return currentFuel / maxFuel;
+	}
+
+	/// <summary>
+	/// Reset rocket for new launch
+	/// </summary>
+	public void Reset(){
+		hasLaunched = false;
+		inSpace = false;
+		rocket.gravityScale = 1;
+		ResetStats ();
+		gameObject.transform.position = startPos;
 	}
 
 }
