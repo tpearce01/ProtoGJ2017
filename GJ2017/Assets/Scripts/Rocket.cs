@@ -15,14 +15,14 @@ public class Rocket : MonoBehaviour {
 	Vector2 startPos;
 
 	//Stat Variables
-	[SerializeField]float maxFuel;
+	public float maxFuel;
 	[SerializeField]float currentFuel;
-	[SerializeField]int enginePower;
-	[SerializeField]int launchPower;
-	[SerializeField]float maxShield;
+	public int enginePower;
+	public int launchPower;
+	public float maxShield;
 	[SerializeField]float currentShield;
-	[SerializeField]float drag;
-	[SerializeField]int maxAmmo;
+	public float drag;
+	public int maxAmmo;
 	[SerializeField]int currentAmmo;
 	[SerializeField]Weapon weapon;
 
