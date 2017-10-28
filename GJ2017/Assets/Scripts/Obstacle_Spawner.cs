@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Obstacle_Spawner : MonoBehaviour {
 
+    public GameObject Rocket;
     public GameObject Meteor;
     public int amount;
     Vector3 new_position;
 
     int counter;
     public float range = 40f;
-
+    float speed;
     GameObject[] obstacles;
 	// Use this for initialization
 	void Start () {
@@ -21,13 +22,18 @@ public class Obstacle_Spawner : MonoBehaviour {
 	void Update () {
 
         obstacles = GameObject.FindGameObjectsWithTag("obstacle");
-            
-        if (obstacles.Length <= amount)
-        {
-            new_position = new Vector3(Random.Range(this.transform.position.x - range, this.transform.position.x + range),
-                                        Random.Range(this.transform.position.y - range, this.transform.position.y + range), 0);
+        speed = Rocket.GetComponent<Rigidbody2D>().velocity.y;
+        Debug.Log(speed);
 
-            Instantiate(Meteor, new_position, Quaternion.identity);
-        }  
+        if (speed != 0)
+        {
+            if (obstacles.Length <= amount)
+            {
+                new_position = new Vector3(Random.Range(this.transform.position.x - range, this.transform.position.x + range),
+                                            Random.Range(this.transform.position.y - range, this.transform.position.y + range), 0);
+
+                Instantiate(Meteor, new_position, Quaternion.identity);
+            }
+        }
 	}
 }
