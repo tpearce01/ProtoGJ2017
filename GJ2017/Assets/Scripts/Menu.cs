@@ -4,10 +4,21 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour {
+	public static Menu m;
+
+
 	string sceneName = "tylers_scene";
 	string mainMenuScene = "main_menu";
 
 	[SerializeField] List<GameObject> menus = new List<GameObject>();
+
+	void Awake(){
+		m = this;
+	}
+
+	void Start(){
+		CloseAll ();
+	}
 
 	void Update(){
 		if (Input.GetKeyDown (KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) {
