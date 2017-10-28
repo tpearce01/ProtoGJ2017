@@ -429,6 +429,22 @@ Prefab:
       propertyPath: m_Name
       value: Meteor Spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 114917605342680070, guid: b1ad942eba7d245448f1c9c1853c18a0,
+        type: 2}
+      propertyPath: Rocket
+      value: 
+      objectReference: {fileID: 1424963506640054, guid: ed7709e466d304d459f38e083cdf4b2e,
+        type: 2}
+    - target: {fileID: 114917605342680070, guid: b1ad942eba7d245448f1c9c1853c18a0,
+        type: 2}
+      propertyPath: amount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114917605342680070, guid: b1ad942eba7d245448f1c9c1853c18a0,
+        type: 2}
+      propertyPath: range
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1ad942eba7d245448f1c9c1853c18a0, type: 2}
   m_IsPrefabParent: 0
@@ -477,6 +493,52 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4489e95421f95ec40a6426b8cc895a60, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &1376860284
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4740185348795134, guid: 4c88d2e7b2e40e445bd63069933f5f07, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -4.431344
+      objectReference: {fileID: 0}
+    - target: {fileID: 4740185348795134, guid: 4c88d2e7b2e40e445bd63069933f5f07, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -4.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 4740185348795134, guid: 4c88d2e7b2e40e445bd63069933f5f07, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4740185348795134, guid: 4c88d2e7b2e40e445bd63069933f5f07, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4740185348795134, guid: 4c88d2e7b2e40e445bd63069933f5f07, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4740185348795134, guid: 4c88d2e7b2e40e445bd63069933f5f07, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4740185348795134, guid: 4c88d2e7b2e40e445bd63069933f5f07, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4740185348795134, guid: 4c88d2e7b2e40e445bd63069933f5f07, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1890921367834054, guid: 4c88d2e7b2e40e445bd63069933f5f07, type: 2}
+      propertyPath: m_Name
+      value: bird_0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 4c88d2e7b2e40e445bd63069933f5f07, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1515444296 stripped
 Transform:

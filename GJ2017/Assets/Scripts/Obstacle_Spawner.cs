@@ -23,7 +23,6 @@ public class Obstacle_Spawner : MonoBehaviour {
 
         obstacles = GameObject.FindGameObjectsWithTag("obstacle");
         speed = Rocket.GetComponent<Rigidbody2D>().velocity.y;
-        Debug.Log(speed);
 
         if (speed != 0)
         {
