@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class HUD : MonoBehaviour {
 
+	public static HUD hud;
+
 	[SerializeField] Text metrics;
 	[SerializeField] Rocket r;
 	[SerializeField] Rigidbody2D rb;
@@ -13,7 +15,11 @@ public class HUD : MonoBehaviour {
 	[SerializeField]Slider fuelMeter;
 	[SerializeField]Image fuelMeterFill;
 
-	float heightOffset;
+	public float heightOffset;
+
+	void Awake(){
+		hud = this;
+	}
 
 	void Start(){
 		heightOffset = -r.transform.position.y;
