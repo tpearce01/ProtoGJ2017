@@ -15,9 +15,21 @@ public class Floating_Obstacles : MonoBehaviour {
         this.GetComponent<Rigidbody2D>().AddForce(ran);
         this.GetComponent<Rigidbody2D>().AddTorque(Random.Range(-50,50));
     }
-	
-	// Update is called once per frame
-	void Update () {
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        this.GetComponent<SpriteRenderer>().enabled = false;
+      
+        this.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+//screenshake
+
+        this.GetComponent<EdgeCollider2D>().enabled = false;
+        this.GetComponent<ParticleSystem>().Play();
+       
+        Destroy(this.gameObject,2);
+    }   
+    // Update is called once per frame
+    void Update () {
+        
     }
 }
