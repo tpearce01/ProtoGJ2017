@@ -393,13 +393,29 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4957486816506442, guid: b1ad942eba7d245448f1c9c1853c18a0, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114917605342680070, guid: b1ad942eba7d245448f1c9c1853c18a0,
         type: 2}
       propertyPath: Rocket
       value: 
       objectReference: {fileID: 1203829611}
+    - target: {fileID: 114917605342680070, guid: b1ad942eba7d245448f1c9c1853c18a0,
+        type: 2}
+      propertyPath: Birds
+      value: 
+      objectReference: {fileID: 1890921367834054, guid: 4c88d2e7b2e40e445bd63069933f5f07,
+        type: 2}
+    - target: {fileID: 114917605342680070, guid: b1ad942eba7d245448f1c9c1853c18a0,
+        type: 2}
+      propertyPath: amount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114917605342680070, guid: b1ad942eba7d245448f1c9c1853c18a0,
+        type: 2}
+      propertyPath: range
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1ad942eba7d245448f1c9c1853c18a0, type: 2}
   m_IsPrefabParent: 0
@@ -592,7 +608,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1203829614}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!199 &606582425
 ParticleSystemRenderer:
@@ -4270,8 +4286,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 606582424}
   - {fileID: 544027747}
+  - {fileID: 606582424}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4313,8 +4329,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91cbb657dcbb24c66984b783e5c1c986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasLaunched: 0
+  inSpace: 0
   rocket: {fileID: 1203829612}
-  fuelEffect: {fileID: 606582423}
+  fuelEffect: {fileID: 606582426}
   maxFuel: 0
   currentFuel: 0
   enginePower: 0
@@ -4423,8 +4441,7 @@ MonoBehaviour:
   maxXDistance: 3
   maxYDistanceUp: 1
   maxYDistanceDown: 3
-  xOffset: 0
-  yOffset: 3
+  offset: {x: 0, y: 0}
   zValue: -10
 --- !u!1 &1728844517
 GameObject:
@@ -4663,7 +4680,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2057905492}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 290.5, y: 163.5, z: 0}
+  m_LocalPosition: {x: 405, y: 228, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1728844518}
