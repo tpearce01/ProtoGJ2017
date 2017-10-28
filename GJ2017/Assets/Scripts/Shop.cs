@@ -4,13 +4,70 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+	public int playerMoney;
+
+	int fuelLevel;
+	int engineLevel;
+	int shieldLevel;
+	int frameLevel;
+	int weaponLevel;
+	int ammoLevel;
+
+	void Start(){
+		playerMoney = 1;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public void UpgradeFuel(){
+		if (playerMoney > GetCost (fuelLevel)) {
+			playerMoney -= GetCost (fuelLevel);
+			fuelLevel++;
+			Rocket.r.maxFuel += fuelLevel * fuelLevel;
+		}
+	}
+
+	public void UpgradeEngine(){
+		if (playerMoney > GetCost (engineLevel)) {
+			playerMoney -= GetCost (engineLevel);
+			engineLevel++;
+			Rocket.r.enginePower += Rocket.r.enginePower / 2;
+		}
+	}
+
+	public void UpgradeShield(){
+		if (playerMoney > GetCost (shieldLevel)) {
+			playerMoney -= GetCost (shieldLevel);
+			shieldLevel++;
+			Rocket.r.maxShield += shieldLevel * 5;
+		}
+	}
+
+	public void UpgradeFrame(){
+		if (playerMoney > GetCost (frameLevel)) {
+			playerMoney -= GetCost (frameLevel);
+			frameLevel++;
+			Rocket.r.drag /= 2;
+		}
+	}
+
+	// !! INCOMPLETE !!
+	public void UpgradeWeapon(){
+		if (playerMoney > GetCost (weaponLevel)) {
+			playerMoney -= GetCost (weaponLevel);
+			weaponLevel++;
+		}
+	}
+
+	public void UpgradeAmmo(){
+		if (playerMoney > GetCost (ammoLevel)) {
+			playerMoney -= GetCost (ammoLevel);
+			ammoLevel++;
+			Rocket.r.maxAmmo += 5;
+		}
+	}
+
+	public void GetCost(int level){
+		if (playerMoney > GetCost ()) {
+			return 100 * level * level;
+		}
 	}
 }

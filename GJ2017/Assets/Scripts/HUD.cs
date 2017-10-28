@@ -13,9 +13,15 @@ public class HUD : MonoBehaviour {
 	[SerializeField]Slider fuelMeter;
 	[SerializeField]Image fuelMeterFill;
 
+	float heightOffset;
+
+	void Start(){
+		heightOffset = -r.transform.position.y;
+	}
+
 	void Update(){
 		metrics.text = "Velocity: " + rb.velocity + "\n" +
-		"Height: " + r.transform.position.y;
+			"Height: " + (r.transform.position.y + heightOffset).ToString("0.00");
 		SetFuelMeter ();
 	}
 

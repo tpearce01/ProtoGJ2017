@@ -9,8 +9,7 @@ public class Follow : MonoBehaviour {
 	[SerializeField]float maxXDistance;		//Max difference between gameobject and target on x axis
 	[SerializeField]float maxYDistanceUp; 	//Max difference between gameobject and target on y axis to north
 	[SerializeField]float maxYDistanceDown; //Max difference between gameobject and target on y axis to south
-	[SerializeField]float xOffset;			//Base offset on x axis
-	[SerializeField]float yOffset;			//Base offset on y axis
+	[SerializeField]Vector2 offset;			//Base offset
 	[SerializeField]float zValue;			//set z value for gameObject
 
 	// Use this for initialization
@@ -20,7 +19,7 @@ public class Follow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		Vector2 destination = Vector2.Lerp (gameObject.transform.position, target.transform.position, lerpSpeed);
+		Vector2 destination = Vector2.Lerp (gameObject.transform.position, target.transform.position + (Vector3)offset, lerpSpeed);
 		gameObject.transform.position = new Vector3(
 			Mathf.Clamp(destination.x, target.transform.position.x - maxXDistance, target.transform.position.x + maxXDistance), 
 			Mathf.Clamp(destination.y, target.transform.position.y - maxYDistanceUp, target.transform.position.y + maxYDistanceDown), 
