@@ -92,12 +92,12 @@ public class Shop : MonoBehaviour {
 	}
 
 	public void SetText(){
-		fuelText.text = "Cost: $" + GetCost (fuelLevel);
-		engineText.text = "Cost: $" + GetCost (engineLevel);
-		shieldText.text = "Cost: $" + GetCost (shieldLevel);
-		frameText.text = "Cost: $" + GetCost (frameLevel);
-		weaponText.text = "Cost: $" + GetCost (weaponLevel);
-		ammoText.text = "Cost: $" + GetCost (ammoLevel);
-		playerMoneyText.text = "Player Money: $" + playerMoney;
+		fuelText.text = "Cost: $" + GetCost (fuelLevel) + "k";
+		engineText.text = "Cost: $" + GetCost (engineLevel) + "k";
+		shieldText.text = "Cost: $" + GetCost (shieldLevel) + "k";
+		frameText.text = "Cost: $" + GetCost (frameLevel) + "k";
+		weaponText.text = "Cost: $" + GetCost (weaponLevel) + "k";
+		ammoText.text = "Cost: $" + GetCost (ammoLevel) + "k";
+		playerMoneyText.text = "Player Money: $" + playerMoney + "k";
 	}
 }
