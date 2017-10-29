@@ -49,7 +49,17 @@ public class Rocket : MonoBehaviour {
 		startPos = gameObject.transform.position;
 	}
 
-	void Update(){
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag =="sbstacle")
+        {
+            
+
+        }
+    }
+
+    void Update(){
 		if (!hasLaunched && !Menu.m.MenuActive()) {
 			//Check for launch
 			if (Input.GetKeyDown (KeyCode.Space)) {
