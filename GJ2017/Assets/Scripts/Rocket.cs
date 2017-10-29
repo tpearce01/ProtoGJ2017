@@ -191,11 +191,13 @@ public class Rocket : MonoBehaviour {
 	}
 
 	void Movement(){
-		if (Input.GetKey (KeyCode.A)) {
-			gameObject.transform.Rotate (0, 0, turnSpeed);
-		}
-		if (Input.GetKey (KeyCode.D)) {
-			gameObject.transform.Rotate (0, 0, -turnSpeed);
+		if (hasLaunched) {
+			if (Input.GetKey (KeyCode.A)) {
+				gameObject.transform.Rotate (0, 0, turnSpeed);
+			}
+			if (Input.GetKey (KeyCode.D)) {
+				gameObject.transform.Rotate (0, 0, -turnSpeed);
+			}
 		}
 	}
 
