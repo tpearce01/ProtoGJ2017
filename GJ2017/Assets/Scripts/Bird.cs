@@ -50,6 +50,5 @@ public class Bird : MonoBehaviour {
 
         if (Vector3.Distance(this.transform.position, camera.transform.position) >= range)
             Destroy(this.gameObject);
-
     }
 }
