@@ -63,7 +63,12 @@ public class Rocket : MonoBehaviour {
 			if (!inSpace) {
 				SetInSpace ();
 			} else if (inSpace) {
-				//starEffect.main.gravityModifier = Mathf.Clamp ((rocket.velocity.y / 10), -10f, 10f);
+				ParticleSystem.MainModule mm = starEffect.main;
+				if (rocket.velocity.y > 0) {
+					mm.gravityModifier = Mathf.Clamp ((rocket.velocity.y / 10), -10f, 10f);
+				} else {
+					mm.gravityModifier = rocket.velocity.y * 2;
+				}
 			}
 
 			//Check for end of round
@@ -130,6 +135,7 @@ public class Rocket : MonoBehaviour {
 		if (gameObject.transform.position.y > orbitHeight) {
 			rocket.gravityScale = 0.1f;
 			inSpace = true;
+			starEffect.gameObject.SetActive (true);
 			starEffect.Play ();
 		}
 	}
@@ -188,6 +194,7 @@ public class Rocket : MonoBehaviour {
 		maxHeight = 0;
 		timeToRoundEnd = timeToRoundEndMaster;
 		gameObject.transform.rotation = baseRotation;
+		starEffect.gameObject.SetActive (false);
 	}
 
 	void Movement(){
