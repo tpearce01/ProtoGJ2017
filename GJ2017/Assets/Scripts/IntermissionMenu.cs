@@ -14,7 +14,7 @@ public class IntermissionMenu : MonoBehaviour {
 
 	public void SetText(){
 		heightText.text = Rocket.r.maxHeight.ToString("0.0") + "km.";
-		moneyText.text = "$" + (int)(Rocket.r.maxHeight * 2);
+		moneyText.text = "$" + (int)(Rocket.r.maxHeight * 2) + "k";
 	}
 
 }
