@@ -8,6 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/main_menu.unity
     guid: 20728c8aa7174446795e5a1ca365717d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/tylers_scene.unity
     guid: 9690d491885c1194b8e78eed318df455
