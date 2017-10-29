@@ -363,6 +363,11 @@ Prefab:
       propertyPath: enginePower
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 50165560862989502, guid: ed7709e466d304d459f38e083cdf4b2e,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ed7709e466d304d459f38e083cdf4b2e, type: 2}
   m_IsPrefabParent: 0
@@ -431,7 +436,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 488283359
+  randomSeed: -1009386144
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3622,6 +3627,17 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &680628873 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114962743620667212, guid: ed7709e466d304d459f38e083cdf4b2e,
+    type: 2}
+  m_PrefabInternal: {fileID: 617619141}
+  m_Script: {fileID: 11500000, guid: 91cbb657dcbb24c66984b783e5c1c986, type: 3}
+--- !u!50 &680628874 stripped
+Rigidbody2D:
+  m_PrefabParentObject: {fileID: 50165560862989502, guid: ed7709e466d304d459f38e083cdf4b2e,
+    type: 2}
+  m_PrefabInternal: {fileID: 617619141}
 --- !u!95 &680628876
 Animator:
   serializedVersion: 3
@@ -7607,6 +7623,16 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.6
       objectReference: {fileID: 0}
+    - target: {fileID: 114969544703310672, guid: 036532c95dcbb49368418bc74f6e07f4,
+        type: 2}
+      propertyPath: r
+      value: 
+      objectReference: {fileID: 680628873}
+    - target: {fileID: 114969544703310672, guid: 036532c95dcbb49368418bc74f6e07f4,
+        type: 2}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 680628874}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 036532c95dcbb49368418bc74f6e07f4, type: 2}
   m_IsPrefabParent: 0
