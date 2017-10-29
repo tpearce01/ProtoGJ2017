@@ -231,6 +231,7 @@ public class Rocket : MonoBehaviour {
 		timeToRoundEnd = timeToRoundEndMaster;
 		gameObject.transform.rotation = baseRotation;
 		starEffect.gameObject.SetActive (false);
+		rocket.angularVelocity = 0;
 	}
 
 	void Movement(){
