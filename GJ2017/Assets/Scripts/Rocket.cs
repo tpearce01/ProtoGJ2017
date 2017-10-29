@@ -40,21 +40,44 @@ public class Rocket : MonoBehaviour {
 	float timeToRoundEndMaster;
 	float timeToRoundEnd;
 
-	void Awake(){
+    //animation
+    
+    Animator anim;
+
+
+
+    void Awake(){
 		r = this;
 	}
 
 	void Start(){
 		Initialize ();
 		startPos = gameObject.transform.position;
-	}
+
+        anim = GetComponent<Animator>();
+//        explode = anim.GetComponent<Animation>();
+
+    }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag =="sbstacle")
+        if (collision.gameObject.tag =="obstacle")
         {
-            
+            if(currentShield <= 0)
+            {
+                
+                anim.SetBool("dead", true);
+               
+
+                
+                this.GetComponent<BoxCollider2D>().enabled = false;
+            this.GetComponent<ParticleSystem>().Play();
+                        // anim.SetBool("dead", false);
+               //if (!explode.IsPlaying("Normal_Rocket"))
+              
+
+            }
 
         }
     }
@@ -102,7 +125,10 @@ public class Rocket : MonoBehaviour {
 		maxHeight += HUD.hud.heightOffset;
 		Shop.s.playerMoney += (int)maxHeight * 2;
 		Menu.m.IntermissionMenu ();
-	}
+        anim.SetBool("dead", false);
+        this.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        this.GetComponent<BoxCollider2D>().enabled = true;
+    }
 
 	void FixedUpdate(){
 		if (hasLaunched && currentFuel > 0 && Input.GetKey (KeyCode.Space)) {
