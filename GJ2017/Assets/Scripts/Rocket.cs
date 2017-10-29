@@ -36,6 +36,7 @@ public class Rocket : MonoBehaviour {
 	//Game Variables
 	bool roundEnd = false;
 	public float maxHeight = 0;
+	bool isDead = false;
 
 	float timeToRoundEndMaster;
 	float timeToRoundEnd;
@@ -64,23 +65,24 @@ public class Rocket : MonoBehaviour {
     {
         if (collision.gameObject.tag =="obstacle")
         {
+			ModifyShield (-6);
             if(currentShield <= 0)
             {
-                
-                anim.SetBool("dead", true);
-               
-
-                
-                this.GetComponent<BoxCollider2D>().enabled = false;
-            this.GetComponent<ParticleSystem>().Play();
-                        // anim.SetBool("dead", false);
-               //if (!explode.IsPlaying("Normal_Rocket"))
-              
-
+				Kill ();
             }
 
         }
     }
+
+	void Kill(){
+		anim.SetBool("dead", true);
+		this.GetComponent<BoxCollider2D>().enabled = false;
+		this.GetComponent<ParticleSystem>().Play();
+		// anim.SetBool("dead", false);
+		//if (!explode.IsPlaying("Normal_Rocket"))
+
+		isDead = true;
+	}
 
     void Update(){
 		if (!hasLaunched && !Menu.m.MenuActive()) {
@@ -105,7 +107,7 @@ public class Rocket : MonoBehaviour {
 			}
 
 			//Check for end of round
-			if(!roundEnd && rocket.velocity.y < 0){
+			if(!roundEnd && (rocket.velocity.y < 0 || isDead)){
 				if (timeToRoundEnd <= 0) {
 					EndRound ();
 				} else {
@@ -131,12 +133,14 @@ public class Rocket : MonoBehaviour {
     }
 
 	void FixedUpdate(){
-		if (hasLaunched && currentFuel > 0 && Input.GetKey (KeyCode.Space)) {
-			Propel ();
-		} else {
-			fuelEffect.Stop ();
+		if (!isDead) {
+			if (hasLaunched && currentFuel > 0 && Input.GetKey (KeyCode.Space)) {
+				Propel ();
+			} else {
+				fuelEffect.Stop ();
+			}
+			Movement ();
 		}
-		Movement ();
 	}
 
 	/// <summary>
@@ -232,6 +236,9 @@ public class Rocket : MonoBehaviour {
 		gameObject.transform.rotation = baseRotation;
 		starEffect.gameObject.SetActive (false);
 		rocket.angularVelocity = 0;
+		isDead = false;
+		this.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+
 	}
 
 	void Movement(){
