@@ -29,7 +29,7 @@ public class Shooting : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        speed = Rocket.GetComponent<Rigidbody2D>().velocity.magnitude;
         if (Input.GetMouseButtonDown(0) && Rocket.GetComponent<Rocket>().currentAmmo > 0)
         {
             //...setting shoot direction
