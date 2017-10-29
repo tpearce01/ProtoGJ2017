@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour {
 
@@ -37,7 +38,8 @@ public class Rocket : MonoBehaviour {
 	bool roundEnd = false;
 	public float maxHeight = 0;
 	bool isDead = false;
-
+	bool win = false;
+	float winTimer;
 	float timeToRoundEndMaster;
 	float timeToRoundEnd;
 
@@ -63,16 +65,37 @@ public class Rocket : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag =="obstacle")
-        {
+		if (collision.gameObject.tag == "obstacle") {
 			ModifyShield (-6);
-            if(currentShield <= 0)
-            {
+			if (currentShield <= 0) {
 				Kill ();
-            }
+			}
 
-        }
+		} else if (collision.gameObject.CompareTag ("Mars")) {
+			StartWin ();
+		}
     }
+
+	void StartWin(){
+		win = true;
+		Debug.Log ("Win: " + win);
+		winTimer = 1;
+		Win ();
+	}
+
+	void WinTimer(){
+		if (winTimer > 0) {
+			winTimer -= Time.deltaTime;
+			Debug.Log (winTimer);
+		} else {
+			EndWin ();
+		}
+		
+	}
+
+	void EndWin(){
+		SceneManager.LoadScene ("Win");
+	}
 
 	void Kill(){
 		anim.SetBool("dead", true);
@@ -107,13 +130,16 @@ public class Rocket : MonoBehaviour {
 			}
 
 			//Check for end of round
-			if(!roundEnd && (rocket.velocity.y < 0 || isDead)){
+			if(!win && !roundEnd && (rocket.velocity.y < 0 || isDead)){
 				if (timeToRoundEnd <= 0) {
 					EndRound ();
 				} else {
 					timeToRoundEnd -= Time.deltaTime;
 				}
 			}
+		}
+		if (win) {
+			WinTimer ();
 		}
 
 	}

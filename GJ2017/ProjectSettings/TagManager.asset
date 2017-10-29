@@ -8,6 +8,7 @@ TagManager:
   - Fire
   - Rocket
   - Bullet
+  - Mars
   layers:
   - Default
   - TransparentFX
