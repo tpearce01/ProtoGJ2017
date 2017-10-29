@@ -7,6 +7,9 @@ public class Shooting : MonoBehaviour {
     Vector3 target;
     public GameObject bullet;
 
+    public GameObject Rocket;
+
+    
     //laser
   //  Ray2D laser;
    // public LineRenderer line;
@@ -27,7 +30,7 @@ public class Shooting : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0) && Rocket.GetComponent<Rocket>().currentAmmo > 0)
         {
             //...setting shoot direction
             Vector3 shootDirection;
@@ -37,9 +40,11 @@ public class Shooting : MonoBehaviour {
             shootDirection = shootDirection - transform.position;
 
             //...instantiating the bullet
-            Rigidbody2D bulletInstance = Instantiate(bullet.GetComponent<Rigidbody2D>(), transform.position, Quaternion.Euler(new Vector3(0, 0, shootDirection.z))) as Rigidbody2D;
+            Rigidbody2D bulletInstance = Instantiate(bullet.GetComponent<Rigidbody2D>(), new Vector3(transform.position.x,transform.position.y, 1), Quaternion.Euler(new Vector3(0, 0, shootDirection.z))) as Rigidbody2D;
 
             bulletInstance.velocity = new Vector2(shootDirection.x * speed, shootDirection.y * speed);
+
+            Rocket.GetComponent<Rocket>().currentAmmo--;
             //...making laser
 
 

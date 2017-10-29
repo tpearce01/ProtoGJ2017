@@ -49,7 +49,7 @@ public class Obstacle_Spawner : MonoBehaviour {
             {
                 new_position = new Vector3(Random.Range(this.transform.position.x - range, this.transform.position.x + range),
                                             Random.Range(this.transform.position.y - range, this.transform.position.y + range), 0);
-                if (height <= 40)//hardcode
+                if (height <= 100)//hardcode
                 {
                     Instantiate(list_of_obstacles[0], new_position, Quaternion.identity);
                 }
