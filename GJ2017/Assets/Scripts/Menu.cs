@@ -8,9 +8,6 @@ public class Menu : MonoBehaviour {
 
 	int menuActive = -1;
 
-	string thisScene = "tylers_scene";
-	string mainMenuScene = "main_menu";
-
 	[SerializeField] List<GameObject> menus = new List<GameObject>();
 
 	void Awake(){
@@ -32,6 +29,10 @@ public class Menu : MonoBehaviour {
 			}
 
 		}
+	}
+
+	public void PlayButtonAudio(){
+		SoundManager.i.PlaySound (Sound.button_press);
 	}
 
 	/// <summary>

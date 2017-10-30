@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
-	[SerializeField] string gameSceneName = "tylers_scene";
+	[SerializeField] string gameSceneName = "Main";
 
 	void Awake(){
 		Screen.SetResolution (1024, 768, false);
@@ -12,10 +12,12 @@ public class MainMenu : MonoBehaviour {
 
 
 	public void StartGame(){
+		SoundManager.i.PlaySound (Sound.button_press);
 		SceneManager.LoadScene (gameSceneName);
 	}
 
 	public void QuitGame(){
+		SoundManager.i.PlaySound (Sound.button_press);
 		Application.Quit ();
 	}
 }

@@ -24,6 +24,7 @@ public class Floating_Obstacles : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+		SoundManager.i.PlaySound (Sound.explosion);
         //hide the obstacle for now
         this.GetComponent<SpriteRenderer>().enabled = false;
       
@@ -39,7 +40,7 @@ public class Floating_Obstacles : MonoBehaviour {
 
         //destory object
         this.GetComponent<ParticleSystem>().Play();
-       
+
         Destroy(this.gameObject,2);
     }   
     // Update is called once per frame

@@ -32,6 +32,7 @@ public class Bird : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+		SoundManager.i.PlaySound (Sound.explosion);
         this.GetComponent<SpriteRenderer>().enabled = false;
 
         this.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;

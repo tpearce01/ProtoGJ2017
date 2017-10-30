@@ -171,5 +171,7 @@ public class SoundManager : MonoBehaviour {
 /// </summary>
 [System.Serializable]
 public enum Sound{
-	Queen = 0
+	Queen = 0,
+	button_press = 1,
+	explosion = 2
 };

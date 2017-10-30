@@ -563,7 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9956ea466218455588b6ce886952177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSceneName: tylers_scene
+  gameSceneName: Main
 --- !u!1 &1531509812
 GameObject:
   m_ObjectHideFlags: 0

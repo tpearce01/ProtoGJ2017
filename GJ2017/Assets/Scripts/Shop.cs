@@ -33,7 +33,8 @@ public class Shop : MonoBehaviour {
 	}
 
 	public void UpgradeFuel(){
-		if (playerMoney > GetCost (fuelLevel)) {
+		SoundManager.i.PlaySound (Sound.button_press);
+		if (playerMoney >= GetCost (fuelLevel)) {
 			playerMoney -= GetCost (fuelLevel);
 			fuelLevel++;
 			Rocket.r.maxFuel += fuelLevel * fuelLevel;
@@ -42,7 +43,8 @@ public class Shop : MonoBehaviour {
 	}
 
 	public void UpgradeEngine(){
-		if (playerMoney > GetCost (engineLevel)) {
+		SoundManager.i.PlaySound (Sound.button_press);
+		if (playerMoney >= GetCost (engineLevel)) {
 			playerMoney -= GetCost (engineLevel);
 			engineLevel++;
 			Rocket.r.enginePower += Rocket.r.enginePower / 2;
@@ -51,7 +53,8 @@ public class Shop : MonoBehaviour {
 	}
 
 	public void UpgradeShield(){
-		if (playerMoney > GetCost (shieldLevel)) {
+		SoundManager.i.PlaySound (Sound.button_press);
+		if (playerMoney >= GetCost (shieldLevel)) {
 			playerMoney -= GetCost (shieldLevel);
 			shieldLevel++;
 			Rocket.r.maxShield += shieldLevel * 5;
@@ -60,7 +63,8 @@ public class Shop : MonoBehaviour {
 	}
 
 	public void UpgradeFrame(){
-		if (playerMoney > GetCost (frameLevel)) {
+		SoundManager.i.PlaySound (Sound.button_press);
+		if (playerMoney >= GetCost (frameLevel)) {
 			playerMoney -= GetCost (frameLevel);
 			frameLevel++;
 			Rocket.r.drag /= 1.1f;
@@ -70,7 +74,8 @@ public class Shop : MonoBehaviour {
 	}
 
 	public void UpgradeAmmo(){
-		if (playerMoney > GetCost (ammoLevel)) {
+		SoundManager.i.PlaySound (Sound.button_press);
+		if (playerMoney >= GetCost (ammoLevel)) {
 			playerMoney -= GetCost (ammoLevel);
 			ammoLevel++;
 			Rocket.r.maxAmmo += 5;
