@@ -8,6 +8,10 @@ public class Rocket : MonoBehaviour {
 
 	public static Rocket r;
 
+	public SpriteRenderer rocketSprite;
+	public Sprite _g;
+	public Sprite _r;
+
 	//Ship Variables
 	[SerializeField] bool hasLaunched = false;
 	[SerializeField] bool inSpace = false;
@@ -59,7 +63,7 @@ public class Rocket : MonoBehaviour {
 
         anim = GetComponent<Animator>();
 //        explode = anim.GetComponent<Animation>();
-
+		anim.enabled = false;
     }
 
 
@@ -98,6 +102,7 @@ public class Rocket : MonoBehaviour {
 	}
 
 	void Kill(){
+		anim.enabled = true;
 		anim.SetBool("dead", true);
 		this.GetComponent<BoxCollider2D>().enabled = false;
 		this.GetComponent<ParticleSystem>().Play();
@@ -142,6 +147,14 @@ public class Rocket : MonoBehaviour {
 			WinTimer ();
 		}
 
+		if (gameObject.transform.position.y > 200 && gameObject.transform.position.y < 900 && rocket.velocity.y > 50) {
+			rocketSprite.sprite = _g;
+			Debug.Log ("Goku");
+		} else {
+			rocketSprite.sprite = _r;
+			Debug.Log ("Rocket");
+		}
+
 	}
 
 	/// <summary>
@@ -154,6 +167,7 @@ public class Rocket : MonoBehaviour {
 		Shop.s.playerMoney += (int)maxHeight * 2;
 		Menu.m.IntermissionMenu ();
         anim.SetBool("dead", false);
+		anim.enabled = false;
         this.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         this.GetComponent<BoxCollider2D>().enabled = true;
     }
