@@ -78,7 +78,7 @@ public class Shop : MonoBehaviour {
 		if (playerMoney >= GetCost (ammoLevel)) {
 			playerMoney -= GetCost (ammoLevel);
 			ammoLevel++;
-			Rocket.r.maxAmmo += 5;
+			Rocket.r.maxAmmo += 5*ammoLevel;
 			SetText ();
 		}
 	}
