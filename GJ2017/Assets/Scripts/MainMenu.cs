@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour {
 	[SerializeField] string gameSceneName = "Main";
 
 	void Awake(){
-		Screen.SetResolution (1024, 768, false);
+		//Screen.SetResolution (1024, 768, false);
 	}
 
 
