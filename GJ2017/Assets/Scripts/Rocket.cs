@@ -164,6 +164,7 @@ public class Rocket : MonoBehaviour {
 				Propel ();
 			} else {
 				fuelEffect.Stop ();
+				SoundManager.i.EndSoundFade ("propel_1", 0.1f);
 			}
 			Movement ();
 		}
@@ -214,6 +215,7 @@ public class Rocket : MonoBehaviour {
 		hasLaunched = true;
 		rocket.AddForce (new Vector2 (0, launchPower));
 		fuelEffect.gameObject.SetActive (true);
+		SoundManager.i.PlaySound (Sound.launch_audio);
 		fuelEffect.Play ();
 	}
 
@@ -225,8 +227,12 @@ public class Rocket : MonoBehaviour {
 		currentFuel -= 0.1f;
 		rocket.AddForce (transform.up * enginePower);
 		if (currentFuel <= 0) {
+			SoundManager.i.EndSoundFade ("propel_1", 0.1f);
 			fuelEffect.Stop ();
 		} else {
+			if (!SoundManager.i.isPlaying ("propel_1")) {
+				SoundManager.i.PlaySound (Sound.propel_1);
+			}
 			fuelEffect.Play ();
 		}
 	}
@@ -253,6 +259,7 @@ public class Rocket : MonoBehaviour {
 		rocket.gravityScale = 1;
 		ResetStats ();
 		gameObject.transform.position = startPos;
+		SoundManager.i.EndSoundFade ("propel_1", 0.1f);
 		fuelEffect.Stop ();
 		fuelEffect.gameObject.SetActive (false);
 		roundEnd = false;

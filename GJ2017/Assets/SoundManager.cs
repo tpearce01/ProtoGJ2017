@@ -59,10 +59,10 @@ public class SoundManager : MonoBehaviour {
 		AudioSource[] sources = gameObject.GetComponents<AudioSource>();
 		for (int i = 0; i < sources.Length; i++) {
 			if (sources[i].clip.name == soundName) {
-				return false;
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	//Plays a sound
