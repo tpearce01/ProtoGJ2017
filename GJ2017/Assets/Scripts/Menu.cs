@@ -82,9 +82,8 @@ public class Menu : MonoBehaviour {
 		Time.timeScale = 0;
 	}
 
-	// !! NOT IMPLEMENTED !!
-	public void ExitToMainMenu(){
-		//SceneManager.LoadScene (mainMenuScene);
+	public void ExitGame(){
+		Application.Quit ();
 	}
 
 	/// <summary>
