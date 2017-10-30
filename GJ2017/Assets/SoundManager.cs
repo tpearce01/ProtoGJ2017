@@ -55,6 +55,16 @@ public class SoundManager : MonoBehaviour {
 		}
 	}
 
+	public bool isPlaying(string soundName){
+		AudioSource[] sources = gameObject.GetComponents<AudioSource>();
+		for (int i = 0; i < sources.Length; i++) {
+			if (sources[i].clip.name == soundName) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	//Plays a sound
 	/// <summary>
 	/// Plays a sound once at default volume
@@ -173,5 +183,8 @@ public class SoundManager : MonoBehaviour {
 public enum Sound{
 	Queen = 0,
 	button_press = 1,
-	explosion = 2
+	explosion = 2,
+	launch_audio = 3,
+	propel_1 = 4,
+	laser = 5
 };
