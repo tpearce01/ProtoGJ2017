@@ -67,7 +67,7 @@ public class Rocket : MonoBehaviour {
     {
 		if (collision.gameObject.tag == "obstacle") {
 			ModifyShield (-6);
-			if (currentShield <= 0) {
+			if (currentShield <= 0 ||collision.gameObject.name == "Glass_Wall") {
 				Kill ();
 			}
 

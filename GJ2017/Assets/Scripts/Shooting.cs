@@ -32,6 +32,7 @@ public class Shooting : MonoBehaviour {
         speed = Rocket.GetComponent<Rigidbody2D>().velocity.magnitude;
         if (Input.GetMouseButtonDown(0) && Rocket.GetComponent<Rocket>().currentAmmo > 0)
         {
+			SoundManager.i.PlaySound (Sound.laser);
             //...setting shoot direction
             Vector3 shootDirection;
             shootDirection = Input.mousePosition;
