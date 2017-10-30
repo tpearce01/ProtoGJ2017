@@ -69,15 +69,6 @@ public class Shop : MonoBehaviour {
 		}
 	}
 
-	// !! INCOMPLETE !!
-	public void UpgradeWeapon(){
-		if (playerMoney > GetCost (weaponLevel)) {
-			playerMoney -= GetCost (weaponLevel);
-			weaponLevel++;
-			SetText ();
-		}
-	}
-
 	public void UpgradeAmmo(){
 		if (playerMoney > GetCost (ammoLevel)) {
 			playerMoney -= GetCost (ammoLevel);
@@ -92,12 +83,11 @@ public class Shop : MonoBehaviour {
 	}
 
 	public void SetText(){
-		fuelText.text = "Cost: $" + GetCost (fuelLevel) + "k";
-		engineText.text = "Cost: $" + GetCost (engineLevel) + "k";
-		shieldText.text = "Cost: $" + GetCost (shieldLevel) + "k";
-		frameText.text = "Cost: $" + GetCost (frameLevel) + "k";
-		weaponText.text = "Cost: $" + GetCost (weaponLevel) + "k";
-		ammoText.text = "Cost: $" + GetCost (ammoLevel) + "k";
+		fuelText.text = "Cost: $" + GetCost (fuelLevel) + "k\nLevel: " + fuelLevel;
+		engineText.text = "Cost: $" + GetCost (engineLevel) + "k\nLevel: " + engineLevel;
+		shieldText.text = "Cost: $" + GetCost (shieldLevel) + "k\nLevel: " + shieldLevel;
+		frameText.text = "Cost: $" + GetCost (frameLevel) + "k\nLevel: " + frameLevel;
+		ammoText.text = "Cost: $" + GetCost (ammoLevel) + "k\nLevel: " + ammoLevel;
 		playerMoneyText.text = "Player Money: $" + playerMoney + "k";
 	}
 }
