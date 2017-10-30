@@ -11,6 +11,7 @@ public class Rocket : MonoBehaviour {
 	public SpriteRenderer rocketSprite;
 	public Sprite _g;
 	public Sprite _r;
+	public GameObject aura;
 
 	//Ship Variables
 	[SerializeField] bool hasLaunched = false;
@@ -149,9 +150,11 @@ public class Rocket : MonoBehaviour {
 
 		if (gameObject.transform.position.y > 200 && gameObject.transform.position.y < 900 && rocket.velocity.y > 50) {
 			rocketSprite.sprite = _g;
+			aura.SetActive (true);
 			Debug.Log ("Goku");
 		} else {
 			rocketSprite.sprite = _r;
+			aura.SetActive (false);
 			Debug.Log ("Rocket");
 		}
 

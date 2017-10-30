@@ -1916,6 +1916,11 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 7b341f53006479d4f8c11fd3965d2675,
         type: 3}
+    - target: {fileID: 114962743620667212, guid: ed7709e466d304d459f38e083cdf4b2e,
+        type: 2}
+      propertyPath: aura
+      value: 
+      objectReference: {fileID: 1118429651}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ed7709e466d304d459f38e083cdf4b2e, type: 2}
   m_IsPrefabParent: 0
@@ -2132,7 +2137,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -252244015
+  randomSeed: -1554994180
   InitialModule:
     serializedVersion: 3
     enabled: 1
